@@ -1,0 +1,18 @@
+{
+    "name": "aoc-2024",
+    "type": "module",
+    "scripts": {
+        "download": "bun src/scripts/downloadInput.ts",
+        "generate": "bun src/scripts/generateSolution.ts",
+        "setup": "bun download && bun generate && bun solve",
+        "solve": "bun src/scripts/runSolution.ts"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.9.4",
+        "@types/bun": "latest",
+        "lefthook": "^1.8.4"
+    },
+    "peerDependencies": {
+        "typescript": "^5.7.2"
+    }
+}

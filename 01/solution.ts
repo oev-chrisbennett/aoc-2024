@@ -13,9 +13,15 @@ for (const line of input.split('\n')) {
 listA.sort((x: number, y: number) => x - y)
 listB.sort((x: number, y: number) => x - y)
 
-const totalDistance: number = listA.reduce((acc: number, a: number, index: number) => {
-    const distance: number = Math.abs(a - listB[index])
-    return acc + distance
-}, 0)
+const { totalDistance, totalSimilarityScore } = listA.reduce((acc, a, index) => {
+    const count: number = listB.filter((b: number) => b === a).length
+    const similarityScore = a * count
 
-console.log(totalDistance)
+    const distance: number = Math.abs(a - listB[index])
+    return {
+        totalDistance: acc.totalDistance + distance,
+        totalSimilarityScore: acc.totalSimilarityScore + similarityScore
+    }
+}, { totalDistance: 0, totalSimilarityScore: 0 })
+
+console.log(`Total distance: ${totalDistance}, Total similarity score: ${totalSimilarityScore}`)

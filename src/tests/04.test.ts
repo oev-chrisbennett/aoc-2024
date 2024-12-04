@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import { findAllXMAS } from "../solutions/04"
+import { findAllXMAS, xMasTheSpot } from "../solutions/04"
 
 test("04 part 1.1", () => {
     const input = `MMMSXXMASM
@@ -30,4 +30,29 @@ XMAS.S
     )
 
     expect(findXMAS).toEqual(4)
+})
+
+test("04 part 2.1", () => {
+    const input = `.M.S......
+..A..MSMS.
+.M.S.MAA..
+..A.ASMSM.
+.M.S.M....
+..........
+S.S.S.S.S.
+.A.A.A.A..
+M.M.M.M.M.
+..........`
+    const part2 = xMasTheSpot(input.split("\n").map((line) => line.split("")))
+    expect(part2).toEqual(9)
+})
+
+test("04 part 2.2", () => {
+    const input = `XXXX
+XXXM
+XXXX
+AXXX
+XSXX`
+    const part2 = xMasTheSpot(input.split("\n").map((line) => line.split("")))
+    expect(part2).toEqual(0)
 })

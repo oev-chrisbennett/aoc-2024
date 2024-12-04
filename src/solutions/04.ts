@@ -63,10 +63,38 @@ export const findAllXMAS = (grid: string[][]): number => {
     return count
 }
 
+export const xMasTheSpot = (grid: string[][]): number => {
+    let count = 0
+    // Don't need the outer edges
+    for (let row = 1; row < grid.length - 1; row++) {
+        for (let col = 1; col < grid[row].length - 1; col++) {
+            // Get the center of the ❌
+            if (grid[row][col] === "A") {
+                // Top left, bottom right
+                const diag1 =
+                    (grid[row - 1][col - 1] === "M" &&
+                        grid[row + 1][col + 1] === "S") ||
+                    (grid[row - 1][col - 1] === "S" &&
+                        grid[row + 1][col + 1] === "M")
+                // Top right, bottom left
+                const diag2 =
+                    (grid[row - 1][col + 1] === "M" &&
+                        grid[row + 1][col - 1] === "S") ||
+                    (grid[row - 1][col + 1] === "S" &&
+                        grid[row + 1][col - 1] === "M")
+                if (diag1 && diag2) count++
+            }
+        }
+    }
+
+    return count
+}
+
 const file = Bun.file("src/inputs/day04.txt")
 const input = await file.text()
 const grid = input.split("\n").map((line) => line.split(""))
 
 const part1 = findAllXMAS(grid)
+const part2 = xMasTheSpot(grid)
 
-console.log(`Day 04, Part 1: ${part1}, Part 2: ${"solution"}`)
+console.log(`Day 04, Part 1: ${part1}, Part 2: ${part2}`)
